@@ -25,21 +25,26 @@ linhas_impares = array_original[0::2]
 
 #############################################################  Letra e #############################################################
 # Defina um novo array com os números múltiplos de 5 do array_original.
+multiplos_5 = array_original[array_original%5==0];
 ####################################################################################################################################
 
 #############################################################  Letra f #############################################################
 # Defina um array com apenas os números positivos do array_original.
+maior_5 = array_original[array_original > 0]
 ####################################################################################################################################
 
 #############################################################  Letra g #############################################################
 # Defina um novo array como sendo a transposta do array_original
+transposta = np.transpose(array_original)
 ####################################################################################################################################
 
 #############################################################  Letra h #############################################################
 # Defina um novo array como sendo um array achatado (apenas uma linha) do array_original usando reshape , ravel ou flatten 
 # (olhe na documentação do numpy imbutida nos links anteriores)
+achatado = array_original.flatten()
 ####################################################################################################################################
 
 #############################################################  Letra i #############################################################
-# Utilizando reshape sobre o array do item anterior, gere um array final com 12 linhas e 2 colunas
+# Utilizando reshape sobre o array do item anterior, gere um array final com 12 linhas e 10 colunas
+reshape = np.reshape(array_original, (12,10))
 ####################################################################################################################################
