@@ -22,7 +22,7 @@ operation(1, []).
 operation(Xa, [X|L]) :-
   Y is Xa mod 4,
   Y = 0,
-  X is Xa - 1
+  X is Xa - 1,
 	operation(X, L).
 
 % regra para X que não é multiplo de 4
