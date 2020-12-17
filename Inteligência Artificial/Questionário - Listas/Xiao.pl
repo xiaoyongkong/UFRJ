@@ -10,6 +10,25 @@ lista(X,[H/T],L):-
     % lista(X,[X|L1],[L2]):- lista(X,L1,L2).
 
 % Faça um programa Prolog que dado um número qualquer X maior ou igual a zero, 
-% retorna em uma lista L, todos os múltiplos de 4 que são menores ou iguais a X.
-mult4(X,[H|T], L]):-
-    X >= 0.
+% retorna em uma lista L, todos os multiplos de 4 que são menores ou iguais a x
+mult4(X, L) :-
+	X >= 0,
+  operation(X, L).
+
+% Caso base
+operation(1, []).
+
+% regra para X multiplo de 4
+operation(Xa, [X|L]) :-
+  Y is Xa mod 4,
+  Y = 0,
+  X is Xa - 1
+	operation(X, L).
+
+% regra para X que não é multiplo de 4
+operation(Xa, L):-
+  Y is Xa mod 4,
+  Y =\= 0,
+  X is Xa - 1,
+  X > 0,
+  operation(X,L).
