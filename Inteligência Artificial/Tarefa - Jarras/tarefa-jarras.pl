@@ -79,9 +79,7 @@ busca_largura_simples(Inicio) :-
 % letra e
 %--------------
 
-% guardar a sequencia
-
-% Duas abordagens: 
+% Duas abordagens para guardar a sequencia: 
 % 1. Retornar todas as configurações percorridas (busca_largura_repeticao_1)
 % 2. Retornar o caminho do inicio ate o nó objetivo (busca_largura_repeticao_2)
 
