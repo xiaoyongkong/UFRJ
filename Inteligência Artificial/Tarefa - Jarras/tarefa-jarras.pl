@@ -53,7 +53,6 @@ acao((J1, J2), passar21, (J1a, J2a)) :-
 vizinhos(N, FilhosN) :-
     findall(Na, acao(N, _, Na), FilhosN).
 
-
 %--------------
 % letra d
 %--------------
@@ -86,9 +85,9 @@ busca_largura_simples(Inicio) :-
 % 1. Retornar todas as configurações percorridas (busca_largura_repeticao_1)
 % 2. Retornar o caminho do inicio ate o nó objetivo (busca_largura_repeticao_2)
 
-%--------------
-% Abordagem 1
-%--------------
+%---------------------
+% Primeira Abordagem
+%---------------------
 
 bfs_repeticao_1([Node|_], [Node]) :- objetivo(Node).
 bfs_repeticao_1([Node|F1], [Node|L]) :-
@@ -97,12 +96,12 @@ bfs_repeticao_1([Node|F1], [Node|L]) :-
     bfs_repeticao_1(F2, L).
 
 % Retorna todos os nós percorridos na busca 
-% busca_largura_repeticao_1(Inicio, S) :-
-%		bfs_repeticao_1([Inicio], S).
+busca_largura_repeticao_1(Inicio, S) :-
+	bfs_repeticao_1([Inicio], S).
 
-%--------------
-% Abordagem 2
-%--------------
+%--------------------
+% Segunda Abordagem
+%--------------------
 
 vizinhos_caminho([N|Caminho], FilhosN) :-
     findall([Na, N|Caminho], acao(N, _, Na), FilhosN).
@@ -130,9 +129,9 @@ busca_largura_repeticao_2(Start, L) :-
 % 1. Retornar todas as configurações percorridas (busca_largura_1)
 % 2. Retornar o caminho do inicio ate o nó objetivo (busca_largura_2)
 
-%--------------
-% Abordagem 1
-%--------------
+%---------------------
+% Primeira Abordagem
+%---------------------
 
 member(X, [X|_]) :- !.
 member(X, [_|T]) :- member(X, T).
@@ -158,9 +157,9 @@ bfs_1([Node|F1], Visitados, [Node|R]) :-
 busca_largura_1(Inicio, R) :-
     bfs_1([Inicio], Inicio, R).
 
-%--------------
-% Abordagem 2
-%--------------
+%--------------------
+% Segunda Abordagem
+%--------------------
 
 vizinhos_caminho_sem_repeticao([N|Caminho], Gerados, FilhosN) :-
     findall([Na, N|Caminho], 
@@ -179,8 +178,6 @@ bfs_2([Caminho|F1], Gerados, S) :-
 busca_largura_2(Inicio, L) :-
     bfs_2([[Inicio]], [Inicio], S),
     reverse(S, L).
-
-% ---------------------------------------------------------------
 
 % ---------------------------------------------------------------
 % Busca em Profundidade - Letra G
@@ -217,9 +214,9 @@ busca_prof_simples(Inicio) :-
 % 1. Retornar todas as configurações percorridas (busca_prof_repeticao_1)
 % 2. Retornar o caminho do inicio ate o nó objetivo (busca_prof_repeticao_2)
 
-%--------------
-% Abordagem 1
-%--------------
+%---------------------
+% Primeira Abordagem
+%---------------------
 
 dfs_repeticao_1([Node|_], [Node]) :- objetivo(Node).
 dfs_repeticao_1([Node|F1], [Node|L]) :-
@@ -232,9 +229,9 @@ dfs_repeticao_1([Node|F1], [Node|L]) :-
 busca_prof_repeticao_1(Inicio, S) :-
     dfs_repeticao_1([Inicio], S).
 
-%--------------
-% Abordagem 2
-%--------------
+%---------------------
+% Segunda Abordagem
+%---------------------
 
 dfs_repeticao_2([[Node|Caminho]|_], [Node|Caminho]) :- 
     objetivo(Node).
@@ -259,9 +256,9 @@ busca_prof_repeticao_2(Inicio, L) :-
 % 1. Retornar todas as configurações percorridas (busca_profundidade_1)
 % 2. Retornar o caminho do inicio ate o nó objetivo (busca_profundidade_2)
 
-%--------------
-% Abordagem 1
-%--------------
+%---------------------
+% Primeira Abordagem
+%---------------------
 
 dfs_1([Node|_], _, [Node]) :- objetivo(Node).
 dfs_1([Node|F1], Visitados, [Node|R]) :-
@@ -275,9 +272,9 @@ dfs_1([Node|F1], Visitados, [Node|R]) :-
 busca_profundidade_1(Inicio, R) :-
     dfs_1([Inicio], [Inicio], R).
 
-%--------------
-% Abordagem 2
-%--------------
+%---------------------
+% Segunda Abordagem
+%---------------------
 
 dfs_2([[Node|Caminho]|_], _, [Node|Caminho]) :- objetivo(Node).
 dfs_2([Caminho|F1], Gerados, S) :-
