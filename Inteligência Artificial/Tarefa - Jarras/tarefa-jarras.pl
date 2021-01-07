@@ -69,11 +69,9 @@ bfs_simples([Node|F1]) :-
 busca_largura_simples(Inicio) :-
     bfs_simples([Inicio]).
 
-% Resposta: Só responde true (caso ache solução objetivo) ou false.
-% Isto ocorre porque não esta sendo salva a arvore 
-% sendo formada na busca, já que não existe, por exemplo, um argumento
-% Lista no predicado busca_largura_simples, o que permitiria
-% retornar as configurações percorridas.
+% Resposta: Só responde true (caso ache solução objetiva).
+% Isto ocorre porque não esta sendo salva a arvore que está sendo formado na busca
+% já que não existe, por exemplo, um argumento.
 
 %--------------
 % letra e
@@ -121,7 +119,7 @@ busca_largura_repeticao_2(Start, L) :-
 % letra f
 %--------------
 
-% evitar estados repetidos
+% Evitar os estados repetidos
 
 % Duas abordagens: 
 % 1. Retornar todas as configurações percorridas (busca_largura_1)
@@ -197,16 +195,15 @@ dfs_simples([Node|F1]) :-
 busca_prof_simples(Inicio) :-
     dfs_simples([Inicio]).
 
-% Resposta: Ocorrou um estouro de pilha, pois como não há um controle para
+% Resposta: Ocorreu um estouro de pilha, pois como não há um controle para
 % evitar passagem por estados já gerados, a busca percorre:
-% [(0,0), (4,0), (4,3), (0,3), (4,3), (0,3)...] e fica presa
-% neste ciclo.
+% [(0,0), (4,0), (4,3), (0,3), (4,3), (0,3)...] e fica presa neste ciclo.
 
 %--------------
 % letra e
 %--------------
 
-% guardar a sequencia
+% Guardar a sequencia
 
 % Duas abordagens: 
 % 1. Retornar todas as configurações percorridas (busca_prof_repeticao_1)
@@ -222,8 +219,7 @@ dfs_repeticao_1([Node|F1], [Node|L]) :-
     adicionar_fronteira_prof(FilhosN, F1, F2),
     dfs_repeticao_1(F2, L).
 
-% Retorna todas as configurações percorridas (mas como não há 
-% tratamento de repeticao, fica em loop)
+% Retorna todas as configurações percorridas (mas como não há tratamento de repeticao, fica em loop)
 busca_prof_repeticao_1(Inicio, S) :-
     dfs_repeticao_1([Inicio], S).
 
@@ -248,7 +244,7 @@ busca_prof_repeticao_2(Inicio, L) :-
 % letra f
 %--------------
 
-% evitar estados repetidos
+% Evitar estados repetidos
 
 % Duas abordagens: 
 % 1. Retornar todas as configurações percorridas (busca_profundidade_1)
@@ -282,7 +278,7 @@ dfs_2([Caminho|F1], Gerados, S) :-
     adicionar_fronteira_largura(FilhosN, F1, F2),
     dfs_2(F2, Gerados1, S).
 
-% Retorna o caminho do inicio até nó solução
+% Retorna o caminho do inicio até o nó solução
 busca_profundidade_2(Inicio, L) :-
     dfs_2([[Inicio]], [Inicio], S),
     reverse(S, L).
