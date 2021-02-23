@@ -19,6 +19,7 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import metrics #Importa métrica para calcular acurácia - módulo do scikit-learn
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_validate
 from sklearn.tree import export_graphviz
@@ -32,14 +33,40 @@ drive.mount('/content/drive')
 
 # carregando a base de dados a ser usada
 diabetes = pd.read_csv("/content/drive/My Drive/IA/diabetes.csv")
+diabetes.count()
 
-diabetes.head()
+Xone_hot_data = pd.get_dummies(X_diabetes[['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']]) #transformando o dataset
+Xone_hot_data.head()
 
 # definir o conceito alvo e as features usadas
 
 feature_cols_diabetes = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']
 X_diabetes = diabetes[feature_cols_diabetes] # selecionamos as colunas correspondentes aos atributos que serão usados
-y_diabetes = diabetes.Outcome # conceito que queremos aprender. Selecionamos a coluna com a classificação das instâncias
+y_diabetes = diabetes.Outcome # Selecionamos a coluna com a classificação das instâncias
+
+# Usando kfold 2
+
+cv = KFold(n_splits=2, random_state=1, shuffle=True)
+model = DecisionTreeClassifier(criterion='entropy')
+scores = cross_validate(model, Xone_hot_data, y_diabetes, scoring=['accuracy'], return_train_score=True, cv=cv)
+print('Accuracy Test: %.3f (%.3f)' % (scores['test_accuracy'].mean(), scores['test_accuracy'].std()))
+print('Accuracy Train: %.3f (%.3f)' % (scores['train_accuracy'].mean(), scores['train_accuracy'].std()))
+
+# Usando kfold 5
+
+cv = KFold(n_splits=5, random_state=1, shuffle=True)
+model = DecisionTreeClassifier(criterion='entropy')
+scores = cross_validate(model, Xone_hot_data, y_diabetes, scoring=['accuracy'], return_train_score=True, cv=cv)
+print('Accuracy Test: %.3f (%.3f)' % (scores['test_accuracy'].mean(), scores['test_accuracy'].std()))
+print('Accuracy Train: %.3f (%.3f)' % (scores['train_accuracy'].mean(), scores['train_accuracy'].std()))
+
+# Usando kfold 10
+
+cv = KFold(n_splits=10, random_state=1, shuffle=True)
+model = DecisionTreeClassifier(criterion='entropy')
+scores = cross_validate(model, Xone_hot_data, y_diabetes, scoring=['accuracy'], return_train_score=True, cv=cv)
+print('Accuracy Test: %.3f (%.3f)' % (scores['test_accuracy'].mean(), scores['test_accuracy'].std()))
+print('Accuracy Train: %.3f (%.3f)' % (scores['train_accuracy'].mean(), scores['train_accuracy'].std()))
 
 """Gerando a árvore de decisão
 
@@ -54,7 +81,6 @@ def classifier(X_train, y_train, criteria):
 
 def generate_tree(clf, feature_names=X_diabetes.columns):
   # tem que usar feature_names = one_hot_data.columns pois feature_names = feature_cols tem menos atributos
-  # pois o one-hot acrescenta mais
   dot_data = StringIO()
   export_graphviz(clf, out_file=dot_data,  
                   filled=True, rounded=True,
