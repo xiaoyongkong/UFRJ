@@ -112,6 +112,13 @@ def prediction_accuracy(clf, X_test, y_test):
   # Medida de acuracia, que indica quantas instâncias são corretamente classificadas
   return metrics.accuracy_score(y_test, y_pred)
 
+X_train_60_diabetes, X_test_60_diabetes, y_train_60_diabetes, y_test_60_diabetes = train_test_split(X_diabetes, y_diabetes, test_size=0.20, random_state=1)
+criteria = "entropy"
+clf_entropy_60_diabetes = classifier(X_train_60_diabetes, y_train_60_diabetes, criteria)
+
+prediction_test_diabetes = prediction_accuracy(clf_entropy_60_diabetes, X_test_60_diabetes, y_test_60_diabetes)
+print('Acurácia teste: ', prediction_test_diabetes)
+
 prediction_test_diabetes = prediction_accuracy(clf_entropy_80_diabetes, X_test_80_diabetes, y_test_80_diabetes)
 print('Acurácia teste: ', prediction_test_diabetes)
 
