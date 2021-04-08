@@ -26,12 +26,12 @@ def parseContent(wordCounter, content):
     for line in content:
         # and every word in them
         for word in line.split():
-            if word in wordCounter:
+            if word.lower() in wordCounter:
                 # if word is already in dictionary, add 1
-                wordCounter[word] += 1
+                wordCounter[word.lower()] += 1
             else:
                 # if word is *not* in dictionary, first occurrence
-                wordCounter[word] = 1
+                wordCounter[word.lower()] = 1
     return wordCounter
 
 def countWords(filesString, N=10):
