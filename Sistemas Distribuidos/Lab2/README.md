@@ -1,0 +1,1 @@
+Para rodar, so executar ./server.py e ./client.py ... no client.py você irá digitar o seu arquivo que deseje ser lido que irá ser recebido pelo server.py
