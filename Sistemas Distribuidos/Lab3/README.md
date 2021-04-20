@@ -1,0 +1,3 @@
+ - [StdinWrapper.py](./StdinWrapper.py) é o encapsulador da entrada padrão. O utilizamos para lidar com o que o administrador do servidor digita pela entrada padrão do servidor. Assim como no `serverSocket`, lidamos com a entrada padrão do administrador quando o método `ready` é chamado.
+
+Para rodar, so executar ./server.py e ./client.py ... no client.py você irá digitar o seu arquivo que deseje ser lido que irá ser recebido pelo server.py
